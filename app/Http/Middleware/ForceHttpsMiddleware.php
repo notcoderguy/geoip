@@ -14,7 +14,6 @@ class ForceHttpsMiddleware
             // Redirect to the HTTPS version of the URL
             return redirect()->secure($request->getRequestUri());
         }
-
         return $next($request);
     }
 }
