@@ -1,4 +1,3 @@
-*
-!mmdb/*
+!mmdb/
 !public/
 !.gitignore
