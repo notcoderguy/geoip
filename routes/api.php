@@ -19,10 +19,13 @@ Route::get("/", function () {
     return response()->json([
         "message" => "Welcome to the GeoIP API!",
         "version" => "1.0.0",
-        "documentation" => "https://geoip.notcoderguy.com/docs",
+        "License" => "MIT",
+        "website" => "https://geoip.in",
+        "documentation" => "https://geoip.in/docs",
         "github" => "https://github.com/notcoderguy/geoip",
         "author" => "https://notcoderguy.com",
     ]);
 })->name("api");
+
 Route::get("/detect", [GeoIP::class,"auto"])->name("auto");
 Route::get('/detect/{ip}', [GeoIP::class, 'detect'])->name ('detect');

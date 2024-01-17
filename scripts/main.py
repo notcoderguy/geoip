@@ -3,7 +3,6 @@ import os
 import subprocess
 from urllib.parse import urlparse
 from dotenv import dotenv_values
-import redis
 
 def download_mmdb_files(LICENSE_KEY, MMDB_DIRECTORY):
     LINKS = [
@@ -51,16 +50,6 @@ def move_mmdb_files(MMDB_DIRECTORY):
             # Remove the empty subdirectory
             shutil.rmtree(folder_path)
 
-def caching_mmdb_files(MMDB_DIRECTORY):
-    search_dir = os.path.join(os.getcwd(), MMDB_DIRECTORY)
-    for file in os.listdir(search_dir):
-        if file.endswith('.mmdb'):
-            file_path = os.path.join(search_dir, file)
-            with open(file_path, 'rb') as f:
-                mmdb_file = f.read()
-                r = redis.Redis(host='localhost', port=6379, db=0)
-                r.set(file, mmdb_file)
-
 def main():
     print('[+] Getting environment variables...')
     config = dotenv_values(".env")
@@ -76,9 +65,6 @@ def main():
     clean_up_mmdb_files(mmdb_directory)
     print('[+] Moving mmdb files...')
     move_mmdb_files(mmdb_directory)
-    # This is not working in laravel, need to figure out how to cache the files
-    # print('[+] Caching mmdb files...')
-    # caching_mmdb_files()
     print('[+] Done!')
 
 if __name__ == "__main__":

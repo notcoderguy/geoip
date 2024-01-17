@@ -18,6 +18,24 @@
 
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> --}}
 
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
     <title>GeoIP</title>
     {{-- <meta name="title" content="GeoIP">
     <meta name="description" content="Explore the world with this GeoIP service. Discover detailed IP information, geolocation data, and more. Whether you're a developer or business owner, unlock valuable insights today."/>
@@ -138,7 +156,8 @@
                     <!-- Features -->
 
                     <div class="flex flex-col md:flex-row gap-10 justify-center relative">
-                        <div class="flex-1 flex-col gap-9 p-4 rounded-md shadow-md mx-20 md:mx-0 border border-black bg-white">
+                        <div
+                            class="flex-1 flex-col gap-9 p-4 rounded-md shadow-md mx-20 md:mx-0 border border-black bg-white">
                             <div class="flex items-center space-x-3">
                                 <div class="flex-none flex items-center justify-center">
                                     <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
@@ -169,7 +188,8 @@
 
                         <!-- <div class="bg-black w-full h-full absolute rounded-full z-0"></div> -->
 
-                        <div class="flex-1 flex-col gap-9 p-4 rounded-md shadow-md mx-20 md:mx-0 border border-black bg-white">
+                        <div
+                            class="flex-1 flex-col gap-9 p-4 rounded-md shadow-md mx-20 md:mx-0 border border-black bg-white">
                             <div class="flex items-center space-x-3">
                                 <div class="flex-none flex items-center justify-center">
                                     <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
@@ -198,7 +218,8 @@
                             </div>
                         </div>
 
-                        <div class="flex-1  flex-col gap-9  p-4 rounded-md shadow-md mx-20 md:mx-0 border border-black bg-white">
+                        <div
+                            class="flex-1  flex-col gap-9  p-4 rounded-md shadow-md mx-20 md:mx-0 border border-black bg-white">
                             <div class="flex items-center space-x-3">
                                 <div class="flex-none flex items-center justify-center">
                                     <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
@@ -337,50 +358,69 @@
                             <div class="p-5 lg:p-6 grow w-full text-white">
                                 @if (isset($ASN))
                                     @if (isset($ASN['ip_address']))
-                                    <div class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
-                                        <span class="font-bold text-xl tracking-wider">IP Address</span> <br> <span class="font-light tracking-wider text-sm">{{ $ASN['ip_address'] }}</span>
-                                    </div>
+                                        <div
+                                            class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
+                                            <span class="font-bold text-xl tracking-wider">IP Address</span> <br> <span
+                                                class="font-light tracking-wider text-sm">{{ $ASN['ip_address'] }}</span>
+                                        </div>
                                     @endif
                                     @if (isset($ASN['autonomous_system_organization']))
-                                    <div class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
-                                        <span class="font-bold text-xl tracking-wider">ASN</span> <br> <span class="font-light tracking-wider text-sm">{{ $ASN['autonomous_system_number'] }}
-                                        ({{ $ASN['autonomous_system_organization'] }})span>
-                                    </div>
+                                        <div
+                                            class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
+                                            <span class="font-bold text-xl tracking-wider">ASN</span> <br> <span
+                                                class="font-light tracking-wider text-sm">{{ $ASN['autonomous_system_number'] }}
+                                                ({{ $ASN['autonomous_system_organization'] }})</span>
+                                        </div>
                                     @endif
                                 @endif
                                 @if (isset($City))
                                     @if (isset($City['city']))
-                                        <div class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
-                                            <span class="font-bold text-xl tracking-wider">City</span> <br> <span class="font-light tracking-wider text-sm">{{ $City['city']['names']['en'] }}</span>
+                                        <div
+                                            class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
+                                            <span class="font-bold text-xl tracking-wider">City</span> <br> <span
+                                                class="font-light tracking-wider text-sm">{{ $City['city']['names']['en'] }}</span>
                                         </div>
                                     @endif
                                     @if (isset($City['country']))
-                                        <div class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
-                                            <span class="font-bold text-xl tracking-wider">City</span> <br> <span class="font-light tracking-wider text-sm">{{ $City['country']['names']['en'] }}</span>
+                                        <div
+                                            class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
+                                            <span class="font-bold text-xl tracking-wider">City</span> <br> <span
+                                                class="font-light tracking-wider text-sm">{{ $City['country']['names']['en'] }}</span>
                                         </div>
                                     @else
-                                        <div class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
-                                            <span class="font-bold text-xl tracking-wider">Country</span> <br> <span class="font-light tracking-wider text-sm">{{ $City['registered_country']['names']['en'] }}
-                                        (Registered)</span>
+                                        <div
+                                            class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
+                                            <span class="font-bold text-xl tracking-wider">Country</span> <br> <span
+                                                class="font-light tracking-wider text-sm">{{ $City['registered_country']['names']['en'] }}
+                                                (Registered)</span>
                                         </div>
                                     @endif
                                     @if (isset($City['continent']))
-                                        <div class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
-                                            <span class="font-bold text-xl tracking-wider">Continent</span> <br> <span class="font-light tracking-wider text-sm">{{ $City['continent']['names']['en'] }}</span>
+                                        <div
+                                            class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
+                                            <span class="font-bold text-xl tracking-wider">Continent</span> <br> <span
+                                                class="font-light tracking-wider text-sm">{{ $City['continent']['names']['en'] }}</span>
                                         </div>
                                     @endif
                                     @if (isset($City['postal']))
-                                        <div class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
-                                            <span class="font-bold text-xl tracking-wider">Postal Code</span> <br> <span class="font-light tracking-wider text-sm">{{ $City['postal']['code'] }}</span>
+                                        <div
+                                            class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
+                                            <span class="font-bold text-xl tracking-wider">Postal Code</span> <br>
+                                            <span
+                                                class="font-light tracking-wider text-sm">{{ $City['postal']['code'] }}</span>
                                         </div>
                                     @endif
                                     @if (isset($City['location']))
-                                        <div class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
-                                            <span class="font-bold text-xl tracking-wider">Latitude</span> <br> <span class="font-light tracking-wider text-sm">{{ $City['location']['latitude'] }}</span>
+                                        <div
+                                            class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
+                                            <span class="font-bold text-xl tracking-wider">Latitude</span> <br> <span
+                                                class="font-light tracking-wider text-sm">{{ $City['location']['latitude'] }}</span>
                                         </div>
 
-                                        <div class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
-                                            <span class="font-bold text-xl tracking-wider">Longitude</span> <br> <span class="font-light tracking-wider text-sm">{{ $City['location']['longitude'] }}</span>
+                                        <div
+                                            class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
+                                            <span class="font-bold text-xl tracking-wider">Longitude</span> <br> <span
+                                                class="font-light tracking-wider text-sm">{{ $City['location']['longitude'] }}</span>
                                         </div>
                                     @endif
                                 @endif
