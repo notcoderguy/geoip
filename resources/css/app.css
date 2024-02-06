@@ -5,11 +5,3 @@
 html {
     scroll-behavior: smooth;
 }
-
-.text-5xl {
-    font-size: 4rem;
-}
-
-.-z-1 {
-    z-index: -1;
-}
