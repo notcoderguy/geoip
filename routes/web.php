@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GeoIP;
+use App\Http\Controllers\GeoIPController as GeoIP;
 
 /*
 |--------------------------------------------------------------------------
