@@ -26,7 +26,8 @@ WORKDIR /var/www/html
 
 # Copy the application code to the container
 COPY . .
-RUN pwd
+RUN 
+RUN ls -la
 
 # Install PHP dependencies
 RUN composer install
