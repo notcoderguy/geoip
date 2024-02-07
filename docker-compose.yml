@@ -28,9 +28,6 @@ services:
       - REDIS_PORT=6379
       - ASN_DB_PATH=${ASN_DB_PATH}
       - CITY_DB_PATH=${CITY_DB_PATH}
-    volumes:
-      - ./:/var/www/html
-      - ./storage:/var/www/html/storage
     depends_on:
       - db
       - redis
