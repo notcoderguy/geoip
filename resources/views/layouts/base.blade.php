@@ -28,8 +28,14 @@
     <link rel="preconnect" href="https://api.fonts.coollabs.io" crossorigin>
     <link href="https://api.fonts.coollabs.io/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
   
+    <!-- Analytics -->
+    <script async src="https://umami.ncgcoolify.cloud/script.js" data-website-id="59f2878f-4a06-42bd-8211-76a07af84515"></script>
 
-    <title>GeoIP | {{ $title ?? 'Home' }}</title>
+    @if (View::hasSection('title'))
+        <title>GeoIP | @yield('title')</title>
+    @else
+        <title>GeoIP | Home</title>
+    @endif
     <meta name="title" content="GeoIP">
     <meta name="description"
         content="Explore the world with this GeoIP service. Discover detailed IP information, geolocation data, and more. Whether you're a developer or business owner, unlock valuable insights today." />
