@@ -19,81 +19,68 @@
 
                 <!-- Card Body -->
                 <div class="p-5 lg:p-6 grow w-full text-base-content">
-                    @if (isset($ASN))
-                        @if (isset($ASN['ip_address']))
+                    @if (isset($data))
+                        @if ($data['IP'] != 'Unknown')
                             <div
                                 class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
                                 <span class="font-medium text-xl tracking-wider">IP Address: </span> <span
-                                    class="font-light tracking-wider text-lg">{{ $ASN['ip_address'] }}</span>
+                                    class="font-light tracking-wider text-lg">{{ $data['IP'] }}</span>
                             </div>
                         @endif
-                        @if (isset($ASN['autonomous_system_organization']))
+                        @if ($data['ASN'] != 'Unknown')
                             <div
                                 class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
                                 <span class="font-medium text-xl tracking-wider">ASN: </span> <span
-                                    class="font-light tracking-wider text-lg">{{ $ASN['autonomous_system_number'] }}
-                                    ({{ $ASN['autonomous_system_organization'] }})</span>
+                                    class="font-light tracking-wider text-lg">{{ $data['ASN']['organization'] }}
+                                    ({{ $data['ASN']['number'] }})</span>
                             </div>
                         @endif
-                    @endif
-                    @if (isset($City))
-                        @if (isset($City['city']))
+                        @if ($data['city']['name'] != 'Unknown')
                             <div
                                 class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
                                 <span class="font-medium text-xl tracking-wider">City: </span> <span
-                                    class="font-light tracking-wider text-lg">{{ $City['city']['names']['en'] }}</span>
+                                    class="font-light tracking-wider text-lg">{{ $data['city']['name'] }}</span>
                             </div>
                         @endif
-                        @if (isset($City['country']))
-                            <div
-                                class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
-                                <span class="font-medium text-xl tracking-wider">City: </span>
-                                <span class="font-light tracking-wider text-lg">{{ $City['country']['names']['en'] }}
-                                </span>
-                                <span>
-                                    <img class="w-6 h-6 align-middle inline-block ml-2 pb-1"
-                                        src="{{ asset('storage/flags/4x3/' . strtolower($City['country']['iso_code']) . '.svg') }}"
-                                        alt="{{ $City['country']['iso_code'] }}">
-                                </span>
-                            </div>
-                        @else
-                            <div
-                                class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
-                                <span class="font-medium text-xl tracking-wider">Country: </span> <span
-                                    class="font-light tracking-wider text-lg">{{ $City['registered_country']['names']['en'] }}
-                                    (Registered)</span>
-                                <span>
-                                    <img class="w-6 h-6 align-middle inline-block ml-2 pb-1"
-                                        src="{{ asset('storage/flags/4x3/' . strtolower($City['registered_country']['iso_code']) . '.svg') }}"
-                                        alt="{{ $City['registered_country']['iso_code'] }}">
-                                </span>
-                            </div>
-                        @endif
-                        @if (isset($City['continent']))
-                            <div
-                                class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
-                                <span class="font-medium text-xl tracking-wider">Continent: </span> <span
-                                    class="font-light tracking-wider text-lg">{{ $City['continent']['names']['en'] }}</span>
-                            </div>
-                        @endif
-                        @if (isset($City['postal']))
+                        @if ($data['city']['postal'] != 'Unknown')
                             <div
                                 class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
                                 <span class="font-medium text-xl tracking-wider">Postal Code: </span> <span
-                                    class="font-light tracking-wider text-lg">{{ $City['postal']['code'] }}</span>
+                                    class="font-light tracking-wider text-lg">{{ $data['postal']['code'] }}</span>
                             </div>
                         @endif
-                        @if (isset($City['location']))
+                        @if ($data['country']['name'] != 'Unknown' || $data['country']['iso_code'] != 'Unknown')
+                            <div
+                                class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
+                                <span class="font-medium text-xl tracking-wider">Country: </span>
+                                <span class="font-light tracking-wider text-lg">{{ $data['country']['name'] }}
+                                </span>
+                                <span>
+                                    <img class="w-6 h-6 align-middle inline-block ml-2 pb-1"
+                                        src="{{ asset('storage/flags/4x3/' . strtolower($data['country']['ISO']) . '.svg') }}"
+                                        alt="{{ $data['country']['ISO'] }}">
+                                </span>
+                            </div>
+                        @endif
+                        @if ($data['continent']['name'] != 'Unknown' || $data['continent']['code'] != 'Unknown')
+                            <div
+                                class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
+                                <span class="font-medium text-xl tracking-wider">Continent: </span> <span
+                                    class="font-light tracking-wider text-lg">{{ $data['continent']['name'] }} (
+                                    {{ $data['continent']['code'] }} ) </span>
+                            </div>
+                        @endif
+                        @if ($data['city']['location']['latitude'] != 'Unknown' || $data['city']['location']['longitude'] != 'Unknown')
                             <div
                                 class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
                                 <span class="font-medium text-xl tracking-wider">Latitude: </span> <span
-                                    class="font-light tracking-wider text-lg">{{ $City['location']['latitude'] }}</span>
+                                    class="font-light tracking-wider text-lg">{{ $data['city']['location']['latitude'] }}</span>
                             </div>
 
                             <div
                                 class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
                                 <span class="font-medium text-xl tracking-wider">Longitude: </span> <span
-                                    class="font-light tracking-wider text-lg">{{ $City['location']['longitude'] }}</span>
+                                    class="font-light tracking-wider text-lg">{{ $data['city']['location']['longitude'] }}</span>
                             </div>
                         @endif
                     @endif
