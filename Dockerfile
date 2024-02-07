@@ -34,27 +34,25 @@ RUN composer install
 COPY .env.example .env
 RUN if [ ! -f ".env" ]; then cp .env.example .env; fi
 
-# Generate app key (This is typically not recommended for production environments)
-# For production, the key should be passed via an environment variable
-RUN php artisan key:generate
+# Enable Apache modules
+RUN a2enmod rewrite
 
 # Run Vite build
 RUN npm install && npm run build
 
 # Create a symbolic link for the storage
 RUN php artisan storage:link
-RUN ls -la
 
-# Change ownership of the storage and bootstrap/cache directories
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Change ownership of the directories
+RUN chown -R www-data:www-data /var/www/html
+RUN find /var/www/html -type d -exec chmod 755 {} \;
+RUN find /var/www/html -type f -exec chmod 644 {} \;
 
 # Update Apache configuration to point to the public directory
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
-RUN ls -la
 
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # Expose port 80
-RUN ls -la
 EXPOSE 80

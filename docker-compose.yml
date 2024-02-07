@@ -5,8 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: laravel-app
-    container_name: laravel-app
+    image: geoip-app
+    container_name: geoip-app
     restart: unless-stopped
     ports:
       - "8060:80"
