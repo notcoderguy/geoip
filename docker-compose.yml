@@ -9,7 +9,7 @@ services:
     container_name: laravel-app
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "8060:80"
     environment:
       - APP_NAME=${APP_NAME}
       - APP_ENV=${APP_ENV}
