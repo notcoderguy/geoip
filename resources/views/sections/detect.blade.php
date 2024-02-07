@@ -46,7 +46,7 @@
                             <div
                                 class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
                                 <span class="font-medium text-xl tracking-wider">Postal Code: </span> <span
-                                    class="font-light tracking-wider text-lg">{{ $data['postal']['code'] }}</span>
+                                    class="font-light tracking-wider text-lg">{{ $data['city']['postal'] }}</span>
                             </div>
                         @endif
                         @if ($data['country']['name'] != 'Unknown' || $data['country']['iso_code'] != 'Unknown')
