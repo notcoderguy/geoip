@@ -27,5 +27,7 @@ Route::get("/", function () {
     ]);
 })->name("api");
 
-Route::get("/detect", [GeoIP::class,"auto"])->name("auto");
-Route::get('/detect/{ip}', [GeoIP::class, 'detect'])->name ('detect');
+Route::middleware('throttle:10,1')->group(function () {
+    Route::get("/detect", [GeoIP::class,"auto"])->name("auto");
+    Route::get('/detect/{ip}', [GeoIP::class, 'detect'])->name ('detect');
+});
