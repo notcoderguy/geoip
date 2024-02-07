@@ -26,8 +26,6 @@ WORKDIR /var/www/html
 
 # Copy the application code to the container
 COPY . .
-RUN 
-RUN ls -la
 
 # Install PHP dependencies
 RUN composer install
@@ -45,15 +43,18 @@ RUN npm install && npm run build
 
 # Create a symbolic link for the storage
 RUN php artisan storage:link
+RUN ls -la
 
 # Change ownership of the storage and bootstrap/cache directories
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Update Apache configuration to point to the public directory
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+RUN ls -la
 
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # Expose port 80
+RUN ls -la
 EXPOSE 80
