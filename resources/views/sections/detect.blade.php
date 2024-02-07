@@ -58,7 +58,7 @@
                                 <span>
                                     <img class="w-6 h-6 align-middle inline-block ml-2 pb-1"
                                         src="{{ asset('storage/flags/4x3/' . strtolower($data['country']['ISO']) . '.svg') }}"
-                                        alt="{{ $data['country']['ISO'] }}">
+                                        alt="({{ $data['country']['ISO'] }})">
                                 </span>
                             </div>
                         @endif
