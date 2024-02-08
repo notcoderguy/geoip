@@ -12,7 +12,7 @@
                 </svg>
                 <span>GeoIP</span>
             </a>
-            <button class="text-base-content hover:text-secondary md:hidden" @click="isOpen = !isOpen">
+            <button aria-label="github" class="text-base-content hover:text-secondary md:hidden" @click="isOpen = !isOpen">
                 <!-- Hamburger Icon -->
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
