@@ -44,10 +44,10 @@ RUN npm install && npm run build
 RUN php artisan storage:link
 
 # DB migration
-RUN php artisan migrate
+RUN php artisan migrate --force
 
 # DB seed
-RUN php artisan db:seed
+RUN php artisan db:seed --force
 
 # Change ownership of the directories
 RUN chown -R www-data:www-data /var/www/html
