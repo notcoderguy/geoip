@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -24,9 +24,9 @@
     <meta name="theme-color" content="#1e2124">
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://api.fonts.coollabs.io">
-    <link rel="preconnect" href="https://api.fonts.coollabs.io" crossorigin>
-    <link href="https://api.fonts.coollabs.io/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
   
     <!-- Analytics -->
     <script async src="https://umami.ncgcoolify.cloud/script.js" data-website-id="59f2878f-4a06-42bd-8211-76a07af84515"></script>
