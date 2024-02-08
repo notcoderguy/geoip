@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use GeoIp2\Database\Reader;
+use App\Models\Country;
 use Exception;
 
 class GeoIPController extends Controller
@@ -30,6 +31,16 @@ class GeoIPController extends Controller
             $ASNRecord = $ASNReader->asn($ip)->jsonSerialize();
             $cityRecord = $cityReader->city($ip)->jsonSerialize();
 
+            try {
+                if (isset($cityRecord['country']['iso_code'])) {
+                    $extracRecord = Country::where('code', $cityRecord['country']['iso_code'])->first();
+                } else {
+                    $extracRecord = Country::where('code', $cityRecord['registered_country']['iso_code'])->first();
+                }
+            } catch (Exception $e) {
+                $extracRecord = null;
+            }
+
             // Combine and prepare the data
             $data = [
                 'IP' => $ASNRecord['ip_address'],
@@ -53,6 +64,8 @@ class GeoIPController extends Controller
                     'name' => $cityRecord['continent']['names']['en'] ?? 'Unknown',
                     'code' => $cityRecord['continent']['code'] ?? 'Unknown',
                 ],
+                'language' => $extracRecord ? json_decode($extracRecord->language, true) : 'Unknown',
+                'currency' => $extracRecord ? json_decode($extracRecord->currency, true) : 'Unknown',
             ];
 
             // Serialize the data to JSON and store in Redis directly

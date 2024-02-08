@@ -83,18 +83,34 @@
                                     class="font-light tracking-wider text-lg">{{ $data['city']['location']['longitude'] }}</span>
                             </div>
                         @endif
+                        @if ($data['currency']['name'] != 'Unknown' || $data['currency']['code'] != 'Unknown')
+                            <div
+                                class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
+                                <span class="font-medium text-xl tracking-wider">Currency: </span> <span
+                                    class="font-light tracking-wider text-lg">{{ $data['currency']['name'] }} (
+                                    {{ $data['currency']['code'] }} - {{ $data['currency']['symbol'] }} ) </span>
+                            </div>
+                        @endif
+                        @if ($data['language']['name'] != 'Unknown' || $data['language']['code'] != 'Unknown')
+                            <div
+                                class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
+                                <span class="font-medium text-xl tracking-wider">Language: </span> <span
+                                    class="font-light tracking-wider text-lg">{{ $data['language']['name'] }} (
+                                    {{ $data['language']['code'] }} ) </span>
+                            </div>
+                        @endif
+                        {{-- <div
+                            class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
+                            <span class="font-medium text-xl tracking-wider">Currency: </span>
+                            <span class="font-light tracking-wider text-lg">Dollar <span
+                                    class="font-medium">($)</span></span>
+                        </div>
+                        <div
+                            class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
+                            <span class="font-medium text-xl tracking-wider">Language: </span>
+                            <span class="font-light tracking-wider text-lg">English US</span>
+                        </div> --}}
                     @endif
-                    {{-- <div
-                        class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
-                        <span class="font-medium text-xl tracking-wider">Currency: </span>
-                        <span class="font-light tracking-wider text-lg">Dollar <span
-                                class="font-medium">($)</span></span>
-                    </div>
-                    <div
-                        class="bg-background text-tertiary py-3 px-5 m-3 rounded-lg sm:text-left text-center border border-secondary">
-                        <span class="font-medium text-xl tracking-wider">Language: </span>
-                        <span class="font-light tracking-wider text-lg">English US</span>
-                    </div> --}}
                 </div>
                 <!-- END Card Body -->
             </div>
