@@ -33,18 +33,23 @@ services:
       - redis
 
   db:
-    image: mysql:8.0
-    container_name: mysql
+    image: mariadb:10.5
+    container_name: mariadb
     restart: unless-stopped
     environment:
       - MYSQL_DATABASE=${DB_DATABASE}
       - MYSQL_USER=${DB_USERNAME}
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_INITDB_SKIP_TZINFO=1
+      - CHARACTER_SET_SERVER=utf8
+      - COLLATION_SERVER=utf8_general_ci
     volumes:
       - dbdata:/var/lib/mysql
     ports:
       - "3306:3306"
+    command: ['--character-set-server=utf8', '--collation-server=utf8_general_ci']
+
 
   redis:
     image: redis:latest
