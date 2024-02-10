@@ -12,4 +12,4 @@ if [ ! -f "/var/www/html/scripts/migration.flag" ]; then
 fi
 
 # Continue with the main process
-exec "$@"
+exec apache2-foreground
