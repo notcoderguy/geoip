@@ -43,12 +43,6 @@ RUN npm install && npm run build
 # Create a symbolic link for the storage
 RUN php artisan storage:link
 
-# DB migration
-RUN php artisan migrate --force
-
-# DB seed
-RUN php artisan db:seed --force
-
 # Change ownership of the directories
 RUN chown -R www-data:www-data /var/www/html
 RUN find /var/www/html -type d -exec chmod 755 {} \;
