@@ -27,6 +27,12 @@ WORKDIR /var/www/html
 # Copy the application code to the container
 COPY . .
 
+# Copy the wait-for-it.sh script from your project directory to the container
+COPY ./scripts/wait-for-it.sh /usr/bin/wait-for-it.sh
+
+# Make sure the script is executable
+RUN chmod +x /usr/bin/wait-for-it.sh
+
 # Install PHP dependencies
 RUN composer install
 
