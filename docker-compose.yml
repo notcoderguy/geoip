@@ -31,7 +31,7 @@ services:
     depends_on:
       - db
       - redis
-    command: /bin/sh -c "/usr/bin/wait-for-it.sh db:3306 -- php artisan migrate --force && php artisan db:seed --force"
+    command: /bin/sh -c "/usr/bin/wait-for-it.sh db:3306 -- php artisan migrate:fresh --force && php artisan db:seed --force"
 
   db:
     image: mariadb:10.5
