@@ -1,0 +1,48 @@
+name: Weekly Python Script Execution
+
+on:
+  schedule:
+    # Runs at 00:00 UTC every Sunday
+    - cron: '0 0 * * 0'
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      # Check out your repository
+      - uses: actions/checkout@v2
+
+      # Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      # Change directory to scripts and set up virtual environment
+      - name: Prepare environment and install dependencies
+        run: |
+          cd scripts
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+
+      # Run Python script within the scripts directory
+      - name: Execute Python script
+        env:
+          # Define your environment variables here, using GitHub secrets or directly
+          MMDB_DIRECTORY: ${{ secrets.MMDB_DIRECTORY }}
+          LICENSE_KEY: ${{ secrets.LICENSE_KEY }}
+        run: |
+          cd scripts
+          source venv/bin/activate
+          python main.py
+          deactivate
+
+      # Commit changes made by the script (if any)
+      - name: Commit and push if changed
+        run: |
+          git config --global user.email "notcoderguy@gmail.com"
+          git config --global user.name "Vasu Grover"
+          git add .
+          git commit -m "Automated script update" || echo "No changes to commit"
+          git push
