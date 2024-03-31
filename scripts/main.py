@@ -34,6 +34,8 @@ def clean_up_mmdb_files(MMDB_DIRECTORY):
     for filename in os.listdir(download_dir):
         if filename.endswith('.tar.gz'):
             os.remove(os.path.join(download_dir, filename))
+        if filename.endswith('.mmdb'):
+            os.remove(os.path.join(download_dir, filename))
 
 def move_mmdb_files(MMDB_DIRECTORY):
     search_dir = os.path.join(os.getcwd(), MMDB_DIRECTORY)
@@ -54,9 +56,12 @@ def main():
     print('[+] Getting environment variables...')
     config = dotenv_values(".env")
     print('[+] Copying License Key from .env file...')
-    license_key = config['LICENSE_KEY']
+    license_key = config.get('LICENSE_KEY', os.getenv('LICENSE_KEY'))
     print('[+] Copying MMDB folder path.')
-    mmdb_directory = config['']
+    mmdb_directory = config.get('MMDB_DIRECTORY', os.getenv('MMDB_DIRECTORY'))
+    if not license_key or not mmdb_directory:
+        print('[-] LICENSE_KEY or MMDB_DIRECTORY not set. Please check your .env file or system environment variables.')
+        return
     print('[+] Downloading mmdb files...')
     download_mmdb_files(license_key, mmdb_directory)
     print('[+] Unzipping mmdb files...')
