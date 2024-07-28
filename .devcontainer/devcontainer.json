@@ -1,0 +1,29 @@
+{
+    "name": "GeoIP App Development Container",
+    "dockerComposeFile": ["../docker-compose.yml"],
+    "service": "app",
+    "workspaceFolder": "/var/www/html",
+    "extensions": [
+        "Codeium.codeium",
+        "formulahendry.auto-rename-tag",
+        "ecmel.vscode-html-css",
+        "shufo.vscode-blade-formatter",
+        "onecentlin.laravel-blade",
+        "DavidAnson.vscode-markdownlint",
+        "christian-kohler.npm-intellisense",
+        "zobo.php-intellisense",
+        "xdebug.php-debug",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "redhat.vscode-yaml"
+    ],
+    "settings": {
+      "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "forwardPorts": [8060],
+    "mounts": [
+      "source=${localWorkspaceFolder},target=/var/www/html,type=bind"
+    ],
+    "remoteUser": "root"
+  }
+  

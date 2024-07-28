@@ -80,6 +80,11 @@ class GeoIPController extends Controller
     {
         try {
             $ip = $request->header('X-Forwarded-For') ?: env('CUSTOM_IP', '8.8.8.8');
+
+            if ($ip == '') {
+                $ip = '8.8.8.8';
+            }
+            
             $data = $this->getIpData($ip);
 
             return view("app", ['data' => $data]);

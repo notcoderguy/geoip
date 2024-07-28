@@ -25,6 +25,7 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
+          apt-get install -y aria2
 
       # Run Python script within the scripts directory
       - name: Execute Python script

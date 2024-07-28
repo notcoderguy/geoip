@@ -43,8 +43,11 @@ RUN if [ ! -f ".env" ]; then cp .env.example .env; fi
 # Enable Apache modules
 RUN a2enmod rewrite
 
+# Install pnpm
+RUN npm install -g pnpm
+
 # Run Vite build
-RUN npm install && npm run build
+RUN pnpm install && pnpm run build
 
 # Create a symbolic link for the storage
 RUN php artisan storage:link
