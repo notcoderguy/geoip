@@ -9,10 +9,10 @@ services:
     restart: "on-failure"
     ports:
       - "8060:80"
-    volumes:
-      - .:/var/www/html
-      - /var/www/html/vendor
-      - /var/www/html/node_modules
+    # volumes:
+    #   - .:/var/www/html
+    #   - /var/www/html/vendor
+    #   - /var/www/html/node_modules
     environment:
       - APP_NAME=${APP_NAME}
       - APP_ENV=${APP_ENV}
