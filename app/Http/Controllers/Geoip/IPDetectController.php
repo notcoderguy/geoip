@@ -11,11 +11,20 @@ use Illuminate\Support\Facades\Redis;
 
 class IPDetectController extends Controller
 {
+    private function getCloudflareClientIP()
+    {
+        if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
+            return $_SERVER['HTTP_CF_CONNECTING_IP'];
+        }
+
+        return $_SERVER['REMOTE_ADDR'];
+    }
+
     public function detect(Request $request, $ip = null)
     {
         try {
-            $ip = $ip ?: $request->header('X-Forwarded-For') ?: $request->ip() ?: '8.8.8.8';
-            $cacheKey = 'geoip_data_'.$ip;
+            $ip = $ip ?: $this->getCloudflareClientIP() ?: '8.8.8.8';
+            $cacheKey = 'geoip_data_' . $ip;
 
             if ($cachedData = Redis::get($cacheKey)) {
                 return response()->json(json_decode($cachedData, true));

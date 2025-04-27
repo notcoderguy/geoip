@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  app:
+  geoip-app:
     build:
       context: .
       dockerfile: Dockerfile
