@@ -111,11 +111,16 @@ RUN php artisan db:seed --force
 # Pull mmdb files for GeoIP
 RUN php artisan geoip:download-mmdb
 
+# Default command to run the Laravel development server
+# Copy start script
+COPY docker/start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh
+
 # Switch to the 'www-data' user
 USER www-data
 
 # Expose port 80 for the web server
 EXPOSE 80
 
-# Default command to run the Laravel development server
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
+# Default command to run Redis and the Laravel development server
+CMD ["sh", "-c", "/usr/local/bin/start.sh"]
