@@ -103,6 +103,8 @@ RUN bun run build
 RUN php artisan key:generate
 
 # Run migrations and seed the database if needed (optional, can also be done at runtime)
+RUN touch database/database.sqlite
+RUN chown -R www-data:www-data database/database.sqlite
 RUN php artisan migrate:fresh --force
 RUN php artisan db:seed --force
 

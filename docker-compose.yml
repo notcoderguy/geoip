@@ -10,9 +10,7 @@ services:
     depends_on:
       - redis
     environment:
-      - GEOIP_MAXMIND_LICENSE_KEY=#{GEOIP_MAXMIND_LICENSE_KEY}
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
+      - GEOIP_MAXMIND_LICENSE_KEY=${GEOIP_MAXMIND_LICENSE_KEY}
 
   redis:
     image: redis:latest
