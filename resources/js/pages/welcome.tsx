@@ -1,8 +1,8 @@
+import AppLogoIcon from '@/components/app-logo-icon'; // Assuming this is the path to your logo icon
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn components are here
 import { Skeleton } from '@/components/ui/skeleton'; // For loading state
 import { Head } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
-import AppLogoIcon from '@/components/app-logo-icon'; // Assuming this is the path to your logo icon
 
 interface GeoIpData {
     IP: string;
@@ -118,7 +118,7 @@ export default function Welcome() {
                 <div className="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
                     <main className="flex w-full max-w-[335px] flex-col-reverse lg:max-w-4xl lg:flex-row">
                         {/* Left Panel: IP Info */}
-                        <Card className="flex-1 rounded-br-lg rounded-bl-lg border-none bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:rounded-tr-none lg:p-10 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
+                        <Card className="flex-1 rounded-br-lg rounded-bl-lg border-none bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-tr-none lg:rounded-br-none lg:p-10 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
                             <CardHeader className="mb-4 p-0 lg:mb-6">
                                 <CardTitle className="mb-1 text-base font-medium">
                                     <span className="flex items-center gap-2">
@@ -204,9 +204,9 @@ export default function Welcome() {
                                     <Skeleton className="h-full w-full" />
                                 </div>
                             ) : error ||
-                                !geoIpData ||
-                                geoIpData.city?.location?.latitude === 'Unknown' ||
-                                geoIpData.city?.location?.longitude === 'Unknown' ? (
+                              !geoIpData ||
+                              geoIpData.city?.location?.latitude === 'Unknown' ||
+                              geoIpData.city?.location?.longitude === 'Unknown' ? (
                                 <div className="flex h-full items-center justify-center p-4 text-center text-gray-500 dark:text-gray-400">
                                     Map unavailable {error ? `(${error})` : '(location unknown)'}
                                 </div>
@@ -226,12 +226,12 @@ export default function Welcome() {
                     </main>
                 </div>
                 <div className="hidden h-14.5 lg:block"></div>
-                <div className="absolute bottom-0 right-0 mb-4 mr-4 flex items-center gap-2 text-sm">
+                <div className="absolute right-0 bottom-0 mr-4 mb-4 flex items-center gap-2 text-sm">
                     <a
                         href="https://notcoderguy.com"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#1b1b18] underline underline-offset-4 decoration-dashed dark:text-[#EDEDEC]"
+                        className="text-[#1b1b18] underline decoration-dashed underline-offset-4 dark:text-[#EDEDEC]"
                     >
                         Made with ❤️ by notcoderguy
                     </a>
