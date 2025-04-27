@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Geoip;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
-use GeoIp2\Database\Reader;
 use App\Models\Country;
 use Exception;
+use GeoIp2\Database\Reader;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class IPDetectController extends Controller
 {
@@ -15,7 +15,7 @@ class IPDetectController extends Controller
     {
         try {
             $ip = $ip ?: $request->header('X-Forwarded-For') ?: $request->ip() ?: '8.8.8.8';
-            $cacheKey = 'geoip_data_' . $ip;
+            $cacheKey = 'geoip_data_'.$ip;
 
             if ($cachedData = Redis::get($cacheKey)) {
                 return response()->json(json_decode($cachedData, true));

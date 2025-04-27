@@ -1,7 +1,7 @@
-import { Head } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Assuming shadcn components are here
 import { Skeleton } from '@/components/ui/skeleton'; // For loading state
+import { Head } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 
 interface GeoIpData {
     IP: string;
@@ -50,7 +50,7 @@ export default function Welcome() {
                 const data: GeoIpData = await response.json();
                 setGeoIpData(data);
             } catch (e: unknown) {
-                console.error("Failed to fetch GeoIP data:", e);
+                console.error('Failed to fetch GeoIP data:', e);
                 let errorMessage = 'Failed to load data.';
                 if (e instanceof Error) {
                     errorMessage = e.message;
@@ -78,29 +78,33 @@ export default function Welcome() {
     const formatLocation = (data: GeoIpData) => {
         const parts = [data.city?.name, data.country?.name, data.country?.ISO].filter(Boolean);
         return parts.join(', ') || 'Unknown';
-    }
+    };
 
     const formatAsn = (data: GeoIpData) => {
         if (!data.ASN || data.ASN.number === 'Unknown') return 'Unknown';
         return `AS${data.ASN.number} (${data.ASN.organization || 'Unknown'})`;
-    }
+    };
 
     const formatCoordinates = (data: GeoIpData) => {
         if (data.city?.location?.latitude === 'Unknown' || data.city?.location?.longitude === 'Unknown') return 'Unknown';
         return `${data.city?.location?.latitude}° N, ${data.city?.location?.longitude}° W`;
-    }
+    };
 
     const formatLanguage = (lang: Record<string, string> | string) => {
         if (typeof lang === 'string') return lang;
         if (!lang) return 'Unknown';
-        return Object.entries(lang).map(([code, name]) => `${name} (${code})`).join(', ');
-    }
+        return Object.entries(lang)
+            .map(([code, name]) => `${name} (${code})`)
+            .join(', ');
+    };
 
     const formatCurrency = (curr: Record<string, string> | string) => {
         if (typeof curr === 'string') return curr;
         if (!curr) return 'Unknown';
-        return Object.entries(curr).map(([code, name]) => `${name} (${code})`).join(', ');
-    }
+        return Object.entries(curr)
+            .map(([code, name]) => `${name} (${code})`)
+            .join(', ');
+    };
 
     return (
         <>
@@ -113,9 +117,9 @@ export default function Welcome() {
                 <div className="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
                     <main className="flex w-full max-w-[335px] flex-col-reverse lg:max-w-4xl lg:flex-row">
                         {/* Left Panel: IP Info */}
-                        <Card className="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-10 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] border-none">
-                            <CardHeader className="p-0 mb-4 lg:mb-6">
-                                <CardTitle className="mb-1 font-medium text-base">GeoIP - IP Information</CardTitle>
+                        <Card className="flex-1 rounded-br-lg rounded-bl-lg border-none bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-10 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
+                            <CardHeader className="mb-4 p-0 lg:mb-6">
+                                <CardTitle className="mb-1 text-base font-medium">GeoIP - IP Information</CardTitle>
                             </CardHeader>
                             <CardContent className="p-0">
                                 {loading ? (
@@ -136,7 +140,10 @@ export default function Welcome() {
                                         {renderInfoItem('Location', formatLocation(geoIpData))}
                                         {renderInfoItem('ASN', formatAsn(geoIpData))}
                                         {renderInfoItem('Coordinates', formatCoordinates(geoIpData))}
-                                        {renderInfoItem('Continent', `${geoIpData.continent?.name || 'Unknown'} (${geoIpData.continent?.code || 'N/A'})`)}
+                                        {renderInfoItem(
+                                            'Continent',
+                                            `${geoIpData.continent?.name || 'Unknown'} (${geoIpData.continent?.code || 'N/A'})`,
+                                        )}
                                         {renderInfoItem('Language(s)', formatLanguage(geoIpData.language))}
                                         {renderInfoItem('Currency', formatCurrency(geoIpData.currency))}
                                     </div>
@@ -187,11 +194,14 @@ export default function Welcome() {
                         {/* Right Panel: Map */}
                         <div className="relative -mb-px aspect-[335/376] w-full shrink-0 overflow-hidden rounded-t-lg bg-gray-200 lg:mb-0 lg:-ml-px lg:aspect-auto lg:w-[438px] lg:rounded-t-none lg:rounded-r-lg dark:bg-gray-800">
                             {loading ? (
-                                <div className="flex items-center justify-center h-full">
+                                <div className="flex h-full items-center justify-center">
                                     <Skeleton className="h-full w-full" />
                                 </div>
-                            ) : error || !geoIpData || geoIpData.city?.location?.latitude === 'Unknown' || geoIpData.city?.location?.longitude === 'Unknown' ? (
-                                <div className="flex items-center justify-center h-full text-gray-500 dark:text-gray-400 p-4 text-center">
+                            ) : error ||
+                              !geoIpData ||
+                              geoIpData.city?.location?.latitude === 'Unknown' ||
+                              geoIpData.city?.location?.longitude === 'Unknown' ? (
+                                <div className="flex h-full items-center justify-center p-4 text-center text-gray-500 dark:text-gray-400">
                                     Map unavailable {error ? `(${error})` : '(location unknown)'}
                                 </div>
                             ) : (
@@ -202,7 +212,7 @@ export default function Welcome() {
                                     loading="lazy"
                                     allowFullScreen
                                     referrerPolicy="no-referrer-when-downgrade"
-                                    src={`https://www.openstreetmap.org/export/embed.html?bbox=${Number(geoIpData.city.location.longitude)-0.1},${Number(geoIpData.city.location.latitude)-0.1},${Number(geoIpData.city.location.longitude)+0.1},${Number(geoIpData.city.location.latitude)+0.1}&layer=mapnik&marker=${geoIpData.city.location.latitude},${geoIpData.city.location.longitude}`}
+                                    src={`https://www.openstreetmap.org/export/embed.html?bbox=${Number(geoIpData.city.location.longitude) - 0.1},${Number(geoIpData.city.location.latitude) - 0.1},${Number(geoIpData.city.location.longitude) + 0.1},${Number(geoIpData.city.location.latitude) + 0.1}&layer=mapnik&marker=${geoIpData.city.location.latitude},${geoIpData.city.location.longitude}`}
                                 ></iframe>
                             )}
                             <div className="absolute inset-0 rounded-t-lg shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-t-none lg:rounded-r-lg dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]" />
