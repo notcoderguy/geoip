@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-80}:80"
+    depends_on:
+      - redis
+    environment:
+      - GEOIP_MAXMIND_LICENSE_KEY=#{GEOIP_MAXMIND_LICENSE_KEY}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
