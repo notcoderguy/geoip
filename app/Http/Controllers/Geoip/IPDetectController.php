@@ -24,7 +24,7 @@ class IPDetectController extends Controller
     {
         try {
             $ip = $ip ?: $this->getCloudflareClientIP() ?: '8.8.8.8';
-            $cacheKey = 'geoip_data_' . $ip;
+            $cacheKey = 'geoip_data_'.$ip;
 
             if ($cachedData = Redis::get($cacheKey)) {
                 return response()->json(json_decode($cachedData, true));
