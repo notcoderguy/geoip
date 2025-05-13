@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Geoip;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class MmdbDownloadController extends Controller
 {
     const DOWNLOAD_URLS = [
-        'asn' =>        'https://mmdb-sync.notcoderguy.com/api/mmdb/download/asn',
-        'city' =>       'https://mmdb-sync.notcoderguy.com/api/mmdb/download/city',
-        'country' =>    'https://mmdb-sync.notcoderguy.com/api/mmdb/download/country',
+        'asn' => 'https://mmdb-sync.notcoderguy.com/api/mmdb/download/asn',
+        'city' => 'https://mmdb-sync.notcoderguy.com/api/mmdb/download/city',
+        'country' => 'https://mmdb-sync.notcoderguy.com/api/mmdb/download/country',
     ];
 
     public function downloadAll()
@@ -46,9 +46,9 @@ class MmdbDownloadController extends Controller
             ])->get($url);
 
             // Debug: log status and headers
-            Log::info("Download status: " . $response->status());
-            Log::info("Content-Length: " . $response->header('Content-Length'));
-            Log::info("Downloaded file size: " . filesize($tempFile));
+            Log::info('Download status: '.$response->status());
+            Log::info('Content-Length: '.$response->header('Content-Length'));
+            Log::info('Downloaded file size: '.filesize($tempFile));
 
             if (! $response->successful()) {
                 throw new \RuntimeException("HTTP request failed with status {$response->status()}");
@@ -64,7 +64,7 @@ class MmdbDownloadController extends Controller
             $magic = fread($handle, 2);
             $firstBytes = fread($handle, 10);
             fclose($handle);
-            Log::info('First 10 bytes (hex): ' . bin2hex($firstBytes));
+            Log::info('First 10 bytes (hex): '.bin2hex($firstBytes));
             if ($magic !== "\x1f\x8b") {
                 throw new \RuntimeException('Downloaded file is not a valid gzip archive');
             }
@@ -73,7 +73,7 @@ class MmdbDownloadController extends Controller
 
             return $extracted;
         } catch (\Exception $e) {
-            throw new \RuntimeException("Failed to process {$type} database: " . $e->getMessage());
+            throw new \RuntimeException("Failed to process {$type} database: ".$e->getMessage());
         } finally {
             if (file_exists($tempFile)) {
                 unlink($tempFile);
@@ -84,7 +84,7 @@ class MmdbDownloadController extends Controller
     private function extractMmdb(string $archivePath, string $type): bool
     {
         $tempDir = sys_get_temp_dir();
-        $extractDir = $tempDir . '/mmdb_extract_' . uniqid();
+        $extractDir = $tempDir.'/mmdb_extract_'.uniqid();
 
         try {
             if (! is_writable($tempDir)) {
@@ -103,7 +103,7 @@ class MmdbDownloadController extends Controller
             exec($command, $output, $returnVar);
 
             if ($returnVar !== 0) {
-                throw new \RuntimeException('Extraction failed: ' . implode("\n", $output));
+                throw new \RuntimeException('Extraction failed: '.implode("\n", $output));
             }
 
             $mmdbFile = $this->findMmdbFile($extractDir);
@@ -116,7 +116,7 @@ class MmdbDownloadController extends Controller
 
             return true;
         } catch (\Exception $e) {
-            throw new \RuntimeException("Failed to extract {$type} database: " . $e->getMessage());
+            throw new \RuntimeException("Failed to extract {$type} database: ".$e->getMessage());
         } finally {
             $this->deleteDirectory($extractDir);
         }
