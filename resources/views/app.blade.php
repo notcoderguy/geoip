@@ -22,9 +22,9 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://geoip.in/">
-    <meta property="twitter:title" content="NotCoderGuy">
+    <meta property="twitter:title" content="GeoIP">
     <meta property="twitter:description"
-        content="Welcome to my website! Explore my portfolio showcasing my passion for developing logical applications and bringing static art to life in games. I specialize in C, C++, C#, Python, PHP, and JavaScript (with React). With a focus on game development and backend development, I create fun experiences for all users. This portfolio, built with Tailwind CSS, reflects my career path and technical interests. Visit my Linkedin profile for more information.">
+        content="Explore the world with this GeoIP service. Discover detailed IP information, geolocation data, and more. Whether you're a developer or business owner, unlock valuable insights today.">
     <meta property="twitter:image" content="/banner.png">
 
     {{-- Inline script to detect system dark mode preference and apply it immediately --}}

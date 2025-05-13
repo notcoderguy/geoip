@@ -108,9 +108,6 @@ RUN chown -R www-data:www-data database/database.sqlite
 RUN php artisan migrate:fresh --force
 RUN php artisan db:seed --force
 
-# Pull mmdb files for GeoIP
-RUN php artisan geoip:download-mmdb
-
 # Default command to run the Laravel development server
 # Copy start script
 COPY docker/start.sh /usr/local/bin/start.sh

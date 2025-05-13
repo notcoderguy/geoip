@@ -7,9 +7,9 @@ use Illuminate\Console\Command;
 
 class DownloadMmdbDatabases extends Command
 {
-    protected $signature = 'geoip:download-mmdb';
+    protected $signature = 'app:pull:mmdb';
 
-    protected $description = 'Download MMDB databases from MaxMind';
+    protected $description = 'Download MMDB databases from the mmdb-sync service.';
 
     public function handle()
     {
