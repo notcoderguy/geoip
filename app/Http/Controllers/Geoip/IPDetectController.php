@@ -30,8 +30,8 @@ class IPDetectController extends Controller
                 return response()->json(json_decode($cachedData, true));
             }
 
-            $asnReader = new Reader(storage_path('app/private/geoip/asn.mmdb'));
-            $cityReader = new Reader(storage_path('app/private/geoip/city.mmdb'));
+            $asnReader = new Reader(storage_path('app/private/mmdb/asn.mmdb'));
+            $cityReader = new Reader(storage_path('app/private/mmdb/city.mmdb'));
 
             $asnData = $asnReader->asn($ip)->jsonSerialize();
             $cityData = $cityReader->city($ip)->jsonSerialize();
