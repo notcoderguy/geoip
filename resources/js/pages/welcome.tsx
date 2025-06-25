@@ -113,16 +113,16 @@ export default function Welcome() {
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
-            <div className="flex min-h-screen flex-col items-center bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-[#0a0a0a]">
+            <div className="flex min-h-screen flex-col items-center bg-background p-6 text-foreground lg:justify-center lg:p-8">
                 <header className="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl"></header>
                 <div className="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
                     <main className="flex w-full max-w-[335px] flex-col-reverse lg:max-w-4xl lg:flex-row">
                         {/* Left Panel: IP Info */}
-                        <Card className="flex-1 rounded-tl-none rounded-tr-none rounded-br-lg rounded-bl-lg border-none bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-10 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
+                        <Card className="flex-1 rounded-tl-none rounded-tr-none rounded-br-lg rounded-bl-lg border bg-card p-6 pb-12 text-sm leading-[20px] lg:rounded-tl-lg lg:rounded-br-none lg:p-10">
                             <CardHeader className="mb-4 p-0 lg:mb-6">
                                 <CardTitle className="mb-1 text-base font-medium">
                                     <span className="flex items-center gap-2">
-                                        <AppLogoIcon className="size-4 fill-current text-black dark:text-white" />
+                                        <AppLogoIcon className="size-4 fill-current text-foreground" />
                                         <span>GeoIP - IP Information</span>
                                     </span>
                                 </CardTitle>
@@ -139,7 +139,7 @@ export default function Welcome() {
                                         <Skeleton className="h-5 w-1/2" />
                                     </div>
                                 ) : error ? (
-                                    <div className="text-red-500 dark:text-red-400">Error loading data: {error}</div>
+                                    <div className="text-destructive">Error loading data: {error}</div>
                                 ) : geoIpData ? (
                                     <div className="mb-4 flex flex-col gap-1 lg:mb-6">
                                         {renderInfoItem('IP Address', geoIpData.IP)}
@@ -160,9 +160,9 @@ export default function Welcome() {
                                 <ul className="mb-4 flex flex-col lg:mb-6">
                                     {/* Documentation Link */}
                                     <li className="relative flex items-center gap-4 py-2">
-                                        <span className="relative bg-white py-1 dark:bg-[#161615]">
-                                            <span className="flex h-3.5 w-3.5 items-center justify-center rounded-full border border-[#e3e3e0] bg-[#FDFDFC] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] dark:border-[#3E3E3A] dark:bg-[#161615]">
-                                                <span className="h-1.5 w-1.5 rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A]" />
+                                        <span className="relative bg-card py-1">
+                                            <span className="flex h-3.5 w-3.5 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+                                                <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50" />
                                             </span>
                                         </span>
                                         <span>
@@ -171,7 +171,7 @@ export default function Welcome() {
                                                 href="https://docs.geoip.in/"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="ml-1 inline-flex items-center space-x-1 font-medium text-[#f53003] underline underline-offset-4 dark:text-[#FF4433]"
+                                                className="ml-1 inline-flex items-center space-x-1 font-medium text-primary underline underline-offset-4"
                                             >
                                                 <span>Documentation</span>
                                                 <svg
@@ -198,7 +198,7 @@ export default function Welcome() {
                         </Card>
 
                         {/* Right Panel: Map */}
-                        <div className="relative -mb-px aspect-[335/376] w-full shrink-0 overflow-hidden rounded-t-lg bg-gray-200 lg:mb-0 lg:-ml-px lg:aspect-auto lg:w-[438px] lg:rounded-t-none lg:rounded-r-lg dark:bg-[#161615]">
+                        <div className="relative -mb-px aspect-[335/376] w-full shrink-0 overflow-hidden rounded-t-lg bg-muted lg:mb-0 lg:-ml-px lg:aspect-auto lg:w-[438px] lg:rounded-t-none lg:rounded-r-lg">
                             {loading ? (
                                 <div className="flex h-full items-center justify-center">
                                     <Skeleton className="h-full w-full" />
@@ -207,7 +207,7 @@ export default function Welcome() {
                               !geoIpData ||
                               geoIpData.city?.location?.latitude === 'Unknown' ||
                               geoIpData.city?.location?.longitude === 'Unknown' ? (
-                                <div className="flex h-full items-center justify-center p-4 text-center text-gray-500 dark:text-gray-400">
+                                    <div className="flex h-full items-center justify-center p-4 text-center text-muted-foreground">
                                     Map unavailable {error ? `(${error})` : '(location unknown)'}
                                 </div>
                             ) : (
@@ -221,17 +221,17 @@ export default function Welcome() {
                                     src={`https://www.openstreetmap.org/export/embed.html?bbox=${Number(geoIpData.city.location.longitude) - 0.1},${Number(geoIpData.city.location.latitude) - 0.1},${Number(geoIpData.city.location.longitude) + 0.1},${Number(geoIpData.city.location.latitude) + 0.1}&layer=mapnik&marker=${geoIpData.city.location.latitude},${geoIpData.city.location.longitude}`}
                                 ></iframe>
                             )}
-                            <div className="absolute inset-0 rounded-t-lg shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-t-none lg:rounded-r-lg dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]" />
+                            <div className="absolute inset-0 rounded-t-lg shadow-[inset_0px_0px_0px_1px_hsl(var(--border))] lg:rounded-t-none lg:rounded-r-lg" />
                         </div>
                     </main>
                 </div>
                 <div className="hidden h-14.5 lg:block"></div>
                 <footer className="flex w-full items-center justify-center bg-transparent py-4 text-sm">
-                    <a
+                        <a
                         href="https://notcoderguy.com"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#1b1b18] underline decoration-dashed underline-offset-4 dark:text-[#EDEDEC]"
+                        className="text-foreground underline decoration-dashed underline-offset-4"
                     >
                         Made with ❤️ by notcoderguy
                     </a>
